@@ -1,0 +1,61 @@
+#Creamos la clase Trabajador y sus propiedades
+class Trabajador():
+    #Inicializamos 
+    
+    #  Al uar un constructor (__init__) inicializara las propiedades
+    def __init__(self):
+        print("<------------------Trabajador------------->")
+        self.nombre = input("Ingrese su nombre:         ")
+        self.categoria = input("Categoria:                 ")
+        self.h_extra = int(input("Horas Extras:              "))
+        self.tardanzas  = int(input("Tardanzas (minutos):       "))
+#  Creamos la clase Boleta que va a heredar de la clase Boleta
+class Boleta(Trabajador):
+#   Creamos el metododatos para calcular 
+    def datos(self):
+        self.A = 3000
+        self.B = 2500
+        self.C = 2000
+        self.T_A = (3000/14400)* self.tardanzas
+        self.T_B = (2500/14400)* self.tardanzas
+        self.T_C = (2000/14400)* self.tardanzas
+        self.E_A = (3000/240)* self.h_extra
+        self.E_B = (2500/240)* self.h_extra
+        self.E_C = (2000/240)* self.h_extra
+    #   Creamos el metodo imprimir para mostrar los datos
+    def imprimir(self):
+        print("<----------------Boleta-------------->")
+        print("Nombre:                   ", self.nombre)
+        print("Categoria:                ", self.categoria)
+        if self.categoria.upper() in ("A"):
+            print("Sueldo Basico:            ", self.A)
+        elif self.categoria.upper() in ("B"):
+            print("Sueldo Basico:            ", self.B)
+        elif self.categoria.upper() in ("C"):
+            print("Sueldo Basico:            ", self.C)
+        else:
+            print("Suendo Basico:            ", "Error")
+        #----------------------------------------------
+        if self.categoria.upper() in ("A"):
+            print("Descuentos Tardanzas:     ", round(self.T_A, 2)) 
+            print("Pago Hora Extras:         ", round(self.E_A, 2))
+        elif self.categoria.upper() in ("B"):
+            print("Descuentos Tardanzas:     ", round(self.T_B, 2))    
+            print("Pago Hora Extras:         ", round(self.E_B, 2))
+        elif self.categoria.upper() in ("C"):
+            print("Descuentos Tardanzas:    ", round(self.T_C, 2)) 
+            print("Pago Hora Extras:         ", round(self.E_C, 2))   
+        else:
+            print("Descuentos Tardanzas:     ", "Error")   
+        #Sueldo Neto
+        
+        if self.categoria.upper() in ("A"):
+            print("Sueldo Neto:              ", round(self.A  - self.T_A + self.E_A, 2 ))   
+        elif self.categoria.upper() in ("B"):
+            print("Sueldo Neto:              ", round(self.B  - self.T_B + self.E_B, 2 ))
+        elif self.categoria.upper() in ("C"):
+            print("Sueldo Neto:              ", round(self.C  - self.T_C + self.E_C, 2 ))   
+#  Bloque principal
+trabajadores = Boleta()
+trabajadores.datos()
+trabajadores.imprimir()
